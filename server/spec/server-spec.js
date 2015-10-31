@@ -20,7 +20,6 @@ describe("Persistent Node Chat Server", function() {
 
     /* Empty the db table before each test so that multiple tests
      * (or repeated runs of the tests) won't screw each other up: */
-     console.log("MUUU********************")
     dbConnection.query("truncate " + tablename, done);
   });
 
@@ -73,6 +72,12 @@ describe("Persistent Node Chat Server", function() {
     // them up to you. */
 
     dbConnection.query(queryString, queryArgs, function(err) {
+      /*
+      NOTE: What aspects query has:
+        // error will be an Error if one occurred during the query
+          // results (which can be the second arguemnt of the callback) will contain the results of the query
+          // fields (the third optional argument?)will contain information about the returned results fields (if any)
+      */
       if (err) { throw err; }
 
       // Now query the Node chat server and see if it returns
